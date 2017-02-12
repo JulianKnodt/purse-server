@@ -71,10 +71,11 @@ async function main() {
 		const bForProduct = await db.any(sql.get_products_by_title(bFor))
 		const bWithProduct = await db.any(sql.get_products_by_title(bWith))
 		//14154498865
-		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct[0].owner_id))
+		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct[0].owner_id))[0]
+		console.log(desiredUser);
+		if (!desiredUser) return;
 		const confirmLink = `https://devweek-purse.herokuapp.com/barter/confirm?bFor=${bFor}&bWith=${bWith}`
 		const denyLink = `https://devweek-purse.herokuapp.com/barter/cancel?bFor=${bFor}&bWith=${bWith}`
-		console.log(desiredUser.phone)
 		sms.send(desiredUser.phone, '14154498865',
 		`${desiredUser.username} is interested in bartering for your ${bForProduct.title} with their ${bWithProduct.title}`)
 		sms.send(desiredUser.phone, '14154498865', 'CONFIRM: ' + confirmLink)

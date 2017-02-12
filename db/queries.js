@@ -13,6 +13,9 @@ const get_user_by_username = (username, fields = '*') =>
 	`select ${ fields } from users where username='${ username }'`
 
 const get_user_by_user_id = (id, fields = '*') =>
+	`select ${ fields } from users where id='${ id }'`
+
+const get_purchases_by_user_id = (id, fields = '*') =>
 	`select ${ fields } from purchases where user_id='${ id }'`
 
 const get_purchases = (fields = '*') =>

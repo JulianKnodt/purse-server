@@ -66,9 +66,9 @@ async function main() {
 	app.get('/', (req, res) => {
 		res.send('Hello!')
 	})
-
-	app.listen(3000, () => {
-		console.log('listening on port 3000')
+	let port = process.env.PORT || 80
+	app.listen(port, () => {
+		console.log('listening on port', port);
 	})
 }
 

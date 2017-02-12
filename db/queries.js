@@ -3,6 +3,9 @@ const limit = n => ` limit ${ n }`
 const get_products = (fields = '*') =>
 	`select ${ fields } from products`
 
+const get_products_by_id = (id) => 
+	`select ${ fields } from products where id='${id}'`
+
 const get_users = (fields = '*') =>
 	`select ${ fields } from users`
 

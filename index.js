@@ -2,8 +2,10 @@ const express = require('express')
 const connect = require('./db')
 const db_config = require('./db/config')
 const sql = require('./db/queries')
+const sms = require('flowroute-sms')('46038404', '1f70ff5b356776c434639f6efa6a01b2')
 const app = express()
 const api = express.Router()
+const barter = express.Router()
 
 const RX_DIGITS = /^\d+$/
 
@@ -62,6 +64,22 @@ async function main() {
 		res.json(purchases)
 	})
 
+	barter.put('/confirm', async (req, res) => {
+		const { bFor, bWith } = req.query
+		//These are products uuids
+		const bForProduct = await db.any(sql.get_products_by_id(bFor))
+		const bWith = await db.any(sql.get_products_by_id(bWith))
+		//14154498865
+		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct.id))
+		sms.send(,'14154498865')
+	}).get('/cancel', async (req, res) => {
+		const { bFor, bWith } = req.query
+		const bForProduct = await db.any(sql.get_products_by_id(bFor))
+		const bWith = await db.any(sql.get_products_by_id(bWith))
+		const deniedUser = await db.any(sql)
+	})
+
+	app.use('/barter', barter)
 	app.use('/api', api)
 	app.get('/', (req, res) => {
 		res.send('Hello!')

@@ -67,12 +67,15 @@ async function main() {
 
 	barter.get('/notify', async (req, res) => {
 		const { bFor, bWith } = req.query
+		console.log(bFor);
+		console.log(bWith);
 		//These are products uuids
 		const bForProduct = await db.oneOrNone(sql.get_products_by_title(bFor))
 		const bWithProduct = await db.oneOrNone(sql.get_products_by_title(bWith))
 		//14154498865
-		console.log(sql.get_user_by_user_id(bForProduct[0].owner_id));
-		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct[0].owner_id))[0]
+		console.log(sql.get_user_by_user_id(bForProduct.owner_id));
+		const desiredUser = await db.oneOrNone(sql.get_user_by_user_id(bForProduct.owner_id))
+		console.log(desiredUser);
 		if (!desiredUser) return;
 		const confirmLink = `https://devweek-purse.herokuapp.com/barter/confirm?bFor=${bFor}&bWith=${bWith}`
 		const denyLink = `https://devweek-purse.herokuapp.com/barter/cancel?bFor=${bFor}&bWith=${bWith}`

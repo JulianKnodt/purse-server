@@ -3,7 +3,7 @@ insert into users values
 	('625ee3a3-137c-47a3-88c2-bf65604a1140', 'bentley-systems-inc', 'contact@bentley.com', 'secure-enterprise-password', '9253212132'),
 	('4a78982b-f018-4d44-8e7a-13b00ce43646', 'cspringer', 'chad@springer.com', 'pw1', '9253212132'),
 	('fbb6c501-119d-40a1-bcc0-524a87246bd8', 'raphael', 'functaire@gmail.com', 'asd', '9253212132'),
-	('7b6ff4c4-e5a9-4a93-9a32-212e909754ed', 'wendyc', 'wendy@wendy.com', 'xyz', '9253212132'),
+	('7b6ff4c4-e5a9-4a93-9a32-212e909754ed', 'wendyc', 'wendy@wendy.com', 'xyz', '4155195074'),
 	('a62c6de3-7cb3-4c88-aa8b-a6545b5075cb', 'joanw', 'joanw@idesigneng.com', '13604', '9253212132');
 
 insert into products values

@@ -68,7 +68,7 @@ async function main() {
 		const { bFor, bWith } = req.query
 		//These are products uuids
 		const bForProduct = await db.any(sql.get_products_by_id(bFor))
-		const bWith = await db.any(sql.get_products_by_id(bWith))
+		const bWithProduct = await db.any(sql.get_products_by_id(bWith))
 		//14154498865
 		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct.id))
 		sms.send(,'14154498865')

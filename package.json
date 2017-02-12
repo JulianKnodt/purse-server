@@ -5,5 +5,8 @@
   },
   "scripts": {
     "start": "node --harmony index.js"
+  },
+  "engines": {
+    "node": "7.4.0"
   }
 }

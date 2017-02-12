@@ -3,7 +3,8 @@ create table users (
 	id uuid primary key,
 	username varchar,
 	email varchar,
-	password varchar
+	password varchar,
+	phone varchar
 );
 create index users_by_username on users (username);
 

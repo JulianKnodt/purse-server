@@ -3,8 +3,8 @@ const limit = n => ` limit ${ n }`
 const get_products = (fields = '*') =>
 	`select ${ fields } from products`
 
-const get_products_by_id = (id) => 
-	`select ${ fields } from products where id='${id}'`
+const get_products_by_title = (title, fields='*') => 
+	`select ${ fields } from products where title='${title}'`
 
 const get_users = (fields = '*') =>
 	`select ${ fields } from users`
@@ -29,6 +29,7 @@ module.exports = {
 	get_products,
 	get_users,
 	get_user_by_username,
+	get_products_by_title,
 	get_user_by_user_id,
 	get_purchases,
 	get_purchased_products_by_user_id,

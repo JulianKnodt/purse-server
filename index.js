@@ -7,6 +7,7 @@ const app = express()
 const api = express.Router()
 const barter = express.Router()
 
+
 const RX_DIGITS = /^\d+$/
 
 async function main() {
@@ -64,20 +65,30 @@ async function main() {
 		res.json(purchases)
 	})
 
-	barter.put('/confirm', async (req, res) => {
+	barter.get('/notify', async (req, res) => {
 		const { bFor, bWith } = req.query
 		//These are products uuids
-		const bForProduct = await db.any(sql.get_products_by_id(bFor))
-		const bWithProduct = await db.any(sql.get_products_by_id(bWith))
+		const bForProduct = await db.any(sql.get_products_by_title(bFor))
+		const bWithProduct = await db.any(sql.get_products_by_title(bWith))
 		//14154498865
-		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct.id))
-		sms.send(,'14154498865')
+		const desiredUser = await db.any(sql.get_user_by_user_id(bForProduct[0].owner_id))
+		const confirmLink = `https://devweek-purse.herokuapp.com/barter/confirm?bFor=${bFor}&bWith=${bWith}`
+		const denyLink = `https://devweek-purse.herokuapp.com/barter/cancel?bFor=${bFor}&bWith=${bWith}`
+		console.log(desiredUser.phone)
+		sms.send(desiredUser.phone, '14154498865',
+		`${desiredUser.username} is interested in bartering for your ${bForProduct.title} with their ${bWithProduct.title}`)
+		sms.send(desiredUser.phone, '14154498865', 'CONFIRM: ' + confirmLink)
+		sms.send(desiredUser.phone, '14154498865', 'DENY: ' + denyLink)
+		console.log('success')
 	}).get('/cancel', async (req, res) => {
-		const { bFor, bWith } = req.query
-		const bForProduct = await db.any(sql.get_products_by_id(bFor))
-		const bWith = await db.any(sql.get_products_by_id(bWith))
-		const deniedUser = await db.any(sql)
-	})
+		// const { bFor, bWith } = req.query
+		// const bForProduct = await db.any(sql.get_products_by_id(bFor))
+		// const bWith = await db.any(sql.get_products_by_id(bWith))
+		// const deniedUser = await db.any(sql.get_user_by_user_id(bForProduct.owner_id))
+	}).put('/confirm', async (req, res) => {
+		// const { bFor, bWith } = req.query
+
+	});
 
 	app.use(function(req, res, next) {
 	  res.header("Access-Control-Allow-Origin", "*");
@@ -90,7 +101,7 @@ async function main() {
 	app.get('/', (req, res) => {
 		res.send('Hello!')
 	})
-	let port = process.env.PORT || 80
+	let port = process.env.PORT || 8080
 	app.listen(port, () => {
 		console.log('listening on port', port);
 	})

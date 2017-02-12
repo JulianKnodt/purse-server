@@ -1,7 +1,8 @@
 {
-  "host": "ec2-54-83-25-217.compute-1.amazonaws.com",
-  "database": "detf7qtlo6fip",
-  "user": "wihzlutatyucci",
+  "host": "ec2-54-225-240-168.compute-1.amazonaws.com",
+  "database": "dd6b2c0mkdep7v",
+  "user": "xdmbaxojsdqnes",
   "post": "5432",
-  "password": "9814587bdb8e939942a1766198cf13ac6d0e5edd7bfd86f3c62a0233735b6bbb"
+  "password": "f0e2de2f6cc79084d688beb72e8d74398847fc710df0b8b4d99705a4eb4e9155",
+  "ssl": true
 }
